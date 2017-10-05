@@ -1,19 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A simple calculator with basic arithmetric functions.
  */
 
 /**
- *
- * @author Muireann
+ * @author Muireann Sheehan
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class Calculator extends javax.swing.JFrame {
+    double currentNumberDisplayed;
+    double selectedNumber;
+    double result;
+    String selectedOperation;
 
     /**
      * Creates new form NewJFrame
      */
-    public NewJFrame() {
+    public Calculator() {
         initComponents();
     }
 
@@ -26,7 +27,6 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        num10 = new javax.swing.JButton();
         display = new javax.swing.JTextField();
         num7 = new javax.swing.JButton();
         num8 = new javax.swing.JButton();
@@ -45,29 +45,57 @@ public class NewJFrame extends javax.swing.JFrame {
         subtraction = new javax.swing.JButton();
         solution = new javax.swing.JButton();
         reset = new javax.swing.JButton();
-
-        num10.setText("7");
-        num10.setPreferredSize(new java.awt.Dimension(40, 40));
+        plusMinus = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         num7.setText("7");
         num7.setPreferredSize(new java.awt.Dimension(40, 40));
+        num7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                num7ActionPerformed(evt);
+            }
+        });
 
         num8.setText("8");
         num8.setPreferredSize(new java.awt.Dimension(40, 40));
+        num8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                num8ActionPerformed(evt);
+            }
+        });
 
         num9.setText("9");
         num9.setPreferredSize(new java.awt.Dimension(40, 40));
+        num9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                num9ActionPerformed(evt);
+            }
+        });
 
         num4.setText("4");
         num4.setPreferredSize(new java.awt.Dimension(40, 40));
+        num4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                num4ActionPerformed(evt);
+            }
+        });
 
         num5.setText("5");
         num5.setPreferredSize(new java.awt.Dimension(40, 40));
+        num5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                num5ActionPerformed(evt);
+            }
+        });
 
         num6.setText("6");
         num6.setPreferredSize(new java.awt.Dimension(40, 40));
+        num6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                num6ActionPerformed(evt);
+            }
+        });
 
         num1.setText("1");
         num1.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -125,7 +153,7 @@ public class NewJFrame extends javax.swing.JFrame {
             }
         });
 
-        multiplication.setText("X");
+        multiplication.setText("*");
         multiplication.setPreferredSize(new java.awt.Dimension(40, 40));
         multiplication.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +179,19 @@ public class NewJFrame extends javax.swing.JFrame {
 
         reset.setText("CLEAR");
         reset.setPreferredSize(new java.awt.Dimension(85, 40));
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
+
+        plusMinus.setText("+/-");
+        plusMinus.setPreferredSize(new java.awt.Dimension(40, 40));
+        plusMinus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                plusMinusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,7 +200,10 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(plusMinus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(decimalPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,7 +245,9 @@ public class NewJFrame extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(display, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(reset, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(plusMinus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(num7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,45 +278,141 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /** Adds '1' to the display */
     private void num1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num1ActionPerformed
-        // TODO add your handling code here:
+        String enterNumber = display.getText() + num1.getText();
+        display.setText(enterNumber);
     }//GEN-LAST:event_num1ActionPerformed
-
+    
+    /** Adds '2' to the display */
     private void num2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num2ActionPerformed
-        // TODO add your handling code here:
+        String enterNumber = display.getText() + num2.getText();
+        display.setText(enterNumber);
     }//GEN-LAST:event_num2ActionPerformed
-
+   
+    /** Adds '3' to the display */
     private void num3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num3ActionPerformed
-        // TODO add your handling code here:
+        String enterNumber = display.getText() + num3.getText();
+        display.setText(enterNumber);
     }//GEN-LAST:event_num3ActionPerformed
-
+                                    
+    /** Adds a decimal point, '.', to the display */
     private void decimalPointActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decimalPointActionPerformed
-        // TODO add your handling code here:
+        String enterNumber = display.getText() + decimalPoint.getText();
+        display.setText(enterNumber);
     }//GEN-LAST:event_decimalPointActionPerformed
-
+    
+    /** Adds '0' to the display */
     private void num0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num0ActionPerformed
-        // TODO add your handling code here:
+        String enterNumber = display.getText() + num0.getText();
+        display.setText(enterNumber);
     }//GEN-LAST:event_num0ActionPerformed
-
+    
+    /** Assigns '+' to the selectedOperation instance variable and clears display */
     private void additionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_additionActionPerformed
-        // TODO add your handling code here:
+        currentNumberDisplayed = Double.parseDouble(display.getText());
+        display.setText("");
+        selectedOperation = "+";
     }//GEN-LAST:event_additionActionPerformed
-
+    
+    /** Assigns '/' to the selectedOperation instance variable and clears display */
     private void divisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divisionActionPerformed
-        // TODO add your handling code here:
+        currentNumberDisplayed = Double.parseDouble(display.getText());
+        display.setText("");
+        selectedOperation = "/";
     }//GEN-LAST:event_divisionActionPerformed
 
+    /** Assigns '*' to the selectedOperation instance variable and clears display */
     private void multiplicationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplicationActionPerformed
-        // TODO add your handling code here:
+        currentNumberDisplayed = Double.parseDouble(display.getText());
+        display.setText("");
+        selectedOperation = "*";
     }//GEN-LAST:event_multiplicationActionPerformed
 
+    /** Assigns '-' to the selectedOperation instance variable and clears display */
     private void subtractionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subtractionActionPerformed
-        // TODO add your handling code here:
+        currentNumberDisplayed = Double.parseDouble(display.getText());
+        display.setText("");
+        selectedOperation = "-";
     }//GEN-LAST:event_subtractionActionPerformed
 
+    /** Performs arithmetic operation and displays the solution */
     private void solutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solutionActionPerformed
-        // TODO add your handling code here:
+        String answer;
+        selectedNumber = Double.parseDouble(display.getText());
+        if (selectedOperation == "+")
+        {
+            result = currentNumberDisplayed + selectedNumber;
+            answer = String.format("%.0f", result);
+            display.setText(answer);
+        }
+        else if (selectedOperation == "-")
+        {
+            result = currentNumberDisplayed - selectedNumber;
+            answer = String.format("%.0f", result);
+            display.setText(answer);
+        }
+        else if (selectedOperation == "*")
+        {
+            result = currentNumberDisplayed * selectedNumber;
+            answer = String.format("%.0f", result);
+            display.setText(answer);
+        }
+        else if (selectedOperation == "/")
+        {
+            result = currentNumberDisplayed / selectedNumber;
+            answer = String.format("%.0f", result);
+            display.setText(answer);
+        }
     }//GEN-LAST:event_solutionActionPerformed
+
+    /** Adds '4' to the display */
+    private void num4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num4ActionPerformed
+        String enterNumber = display.getText() + num4.getText();
+        display.setText(enterNumber);
+    }//GEN-LAST:event_num4ActionPerformed
+
+    /** Adds '5' to the display */
+    private void num5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num5ActionPerformed
+        String enterNumber = display.getText() + num5.getText();
+        display.setText(enterNumber);
+    }//GEN-LAST:event_num5ActionPerformed
+
+    /** Adds '6' to the display */
+    private void num6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num6ActionPerformed
+        String enterNumber = display.getText() + num6.getText();
+        display.setText(enterNumber);
+    }//GEN-LAST:event_num6ActionPerformed
+
+    /** Adds '7' to the display */
+    private void num7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num7ActionPerformed
+        String enterNumber = display.getText() + num7.getText();
+        display.setText(enterNumber);
+    }//GEN-LAST:event_num7ActionPerformed
+
+    /** Adds '8' to the display */
+    private void num8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num8ActionPerformed
+        String enterNumber = display.getText() + num8.getText();
+        display.setText(enterNumber);
+    }//GEN-LAST:event_num8ActionPerformed
+
+    /** Adds '9' to the display */
+    private void num9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_num9ActionPerformed
+        String enterNumber = display.getText() + num9.getText();
+        display.setText(enterNumber);
+    }//GEN-LAST:event_num9ActionPerformed
+
+    /** Clears the display */
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        display.setText("");
+    }//GEN-LAST:event_resetActionPerformed
+
+    /** Changes the sign of the number currently displayed */
+    private void plusMinusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusMinusActionPerformed
+        double numDisplay = Double.parseDouble(String.valueOf(display.getText()));
+        numDisplay = numDisplay*(-1);
+        display.setText(String.valueOf(numDisplay));
+    }//GEN-LAST:event_plusMinusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,20 +431,21 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Calculator.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewJFrame().setVisible(true);
+                new Calculator().setVisible(true);
             }
         });
     }
@@ -315,7 +458,6 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton multiplication;
     private javax.swing.JButton num0;
     private javax.swing.JButton num1;
-    private javax.swing.JButton num10;
     private javax.swing.JButton num2;
     private javax.swing.JButton num3;
     private javax.swing.JButton num4;
@@ -324,6 +466,7 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JButton num7;
     private javax.swing.JButton num8;
     private javax.swing.JButton num9;
+    private javax.swing.JButton plusMinus;
     private javax.swing.JButton reset;
     private javax.swing.JButton solution;
     private javax.swing.JButton subtraction;
